@@ -1,4 +1,7 @@
 package enzosdev.elifoot.repository;
 
-public interface PlayerRepository {
+import enzosdev.elifoot.entity.Player;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PlayerRepository extends JpaRepository<Player, Long> {
 }
