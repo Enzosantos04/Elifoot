@@ -27,5 +27,17 @@ public class StadiumService {
     }
 
 
+    public StadiumDTO createStadium(StadiumDTO stadiumDTO){
+        Stadium stadium = stadiumMapper.map(stadiumDTO);
+        if (stadium != null){
+        stadium = stadiumRepository.save(stadium);
+        return stadiumMapper.map(stadium);
+        } else {
+            throw new RuntimeException("Stadium can not be empty, try again");
+        }
+
+    }
+
+
 
 }
