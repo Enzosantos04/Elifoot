@@ -5,9 +5,7 @@ import enzosdev.elifoot.dto.StadiumDTO;
 import enzosdev.elifoot.service.StadiumService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/stadiums")
@@ -23,5 +21,11 @@ public class StadiumController {
     @GetMapping
     public Page<StadiumDTO> findAll(Pageable pageable){
         return stadiumService.findAll(pageable);
+    }
+
+
+    @PostMapping
+    public StadiumDTO createStadium(@RequestBody StadiumDTO stadiumDTO){
+        return stadiumService.createStadium(stadiumDTO);
     }
 }
