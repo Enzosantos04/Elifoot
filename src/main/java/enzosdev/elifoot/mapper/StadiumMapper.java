@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StadiumMapper {
 
-    public static StadiumDTO map(Stadium stadium){
+    public StadiumDTO map(Stadium stadium){
         StadiumDTO dto = new StadiumDTO();
         dto.setId(stadium.getId());
         dto.setName(stadium.getName());
@@ -20,7 +20,7 @@ public class StadiumMapper {
     }
 
 
-    public static Stadium map(StadiumDTO stadiumDTO){
+    public Stadium map(StadiumDTO stadiumDTO){
         Stadium stadium = new Stadium();
         stadium.setId(stadiumDTO.getId());
         stadium.setName(stadiumDTO.getName());
