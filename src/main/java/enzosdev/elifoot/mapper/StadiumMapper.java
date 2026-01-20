@@ -24,7 +24,7 @@ public class StadiumMapper {
         Stadium stadium = new Stadium();
         stadium.setId(stadiumDTO.getId());
         stadium.setName(stadiumDTO.getName());
-        stadium.setCity(stadium.getCity());
+        stadium.setCity(stadiumDTO.getCity());
         stadium.setCapacity(stadiumDTO.getCapacity());
         stadium.setUrlImg(stadiumDTO.getUrlImg());
 
