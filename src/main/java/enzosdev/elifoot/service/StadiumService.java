@@ -28,12 +28,13 @@ public class StadiumService {
 
 
     public StadiumDTO createStadium(StadiumDTO stadiumDTO){
-        Stadium stadium = stadiumMapper.map(stadiumDTO);
-        if (stadium != null){
-        stadium = stadiumRepository.save(stadium);
-        return stadiumMapper.map(stadium);
-        } else {
+
+        if (stadiumDTO.getName().isEmpty() || stadiumDTO.getCity().isEmpty() || stadiumDTO.getCity().isBlank()){
             throw new RuntimeException("Stadium can not be empty, try again");
+        } else {
+            Stadium stadium = stadiumMapper.map(stadiumDTO);
+            stadium = stadiumRepository.save(stadium);
+            return stadiumMapper.map(stadium);
         }
 
     }
