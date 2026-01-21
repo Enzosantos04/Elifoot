@@ -36,7 +36,7 @@ public class StadiumController {
     }
 
     @DeleteMapping("/{id}")
-    public StadiumDTO deleteStadiumById(@PathVariable Long id){
-        return stadiumService.deleteStadiumById(id);
+    public void deleteStadiumById(@PathVariable Long id){
+      stadiumService.deleteStadiumById(id);
     }
 }
