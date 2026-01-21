@@ -3,6 +3,7 @@ package enzosdev.elifoot.controller;
 
 import enzosdev.elifoot.dto.StadiumDTO;
 import enzosdev.elifoot.service.StadiumService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class StadiumController {
 
 
     @PostMapping
-    public StadiumDTO createStadium(@RequestBody StadiumDTO stadiumDTO){
+    public StadiumDTO createStadium(@Valid @RequestBody StadiumDTO stadiumDTO){
         return stadiumService.createStadium(stadiumDTO);
     }
 
@@ -40,5 +41,10 @@ public class StadiumController {
     public ResponseEntity<?> deleteStadiumById(@PathVariable Long id){
       stadiumService.deleteStadiumById(id);
       return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}")
+    public StadiumDTO updateStadiumById(@PathVariable Long id, @RequestBody StadiumDTO stadiumDTO){
+        return stadiumService.updateStadiumById(id, stadiumDTO);
     }
 }
