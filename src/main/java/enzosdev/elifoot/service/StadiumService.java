@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class StadiumService {
 
@@ -39,6 +41,15 @@ public class StadiumService {
 
     }
 
+    public StadiumDTO findStadiumById(Long id){
+        Optional<Stadium> stadium = stadiumRepository.findById(id);
+        return stadium.map(stadiumMapper::map).orElseThrow(()-> new RuntimeException("Stadium not found"));
+    }
+
+//
+//    public void deleteStadiumById(Long id){
+//        if ()
+//    }
 
 
 }
