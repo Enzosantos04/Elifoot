@@ -46,10 +46,14 @@ public class StadiumService {
         return stadium.map(stadiumMapper::map).orElseThrow(()-> new RuntimeException("Stadium not found"));
     }
 
-//
-//    public void deleteStadiumById(Long id){
-//        if ()
-//    }
+
+    public StadiumDTO deleteStadiumById(Long id){
+        if (findStadiumById(id) == null){
+            throw new RuntimeException("Stadium Not found");
+        }
+        stadiumRepository.deleteById(id);
+        return null;
+    }
 
 
 }
