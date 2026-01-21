@@ -28,4 +28,10 @@ public class StadiumController {
     public StadiumDTO createStadium(@RequestBody StadiumDTO stadiumDTO){
         return stadiumService.createStadium(stadiumDTO);
     }
+
+
+    @GetMapping("/{id}")
+    public StadiumDTO findStadiumById(@PathVariable Long id){
+        return stadiumService.findStadiumById(id);
+    }
 }
