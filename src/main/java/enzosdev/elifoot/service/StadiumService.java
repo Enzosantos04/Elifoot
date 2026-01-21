@@ -48,9 +48,14 @@ public class StadiumService {
 
 
     public void deleteStadiumById(Long id) {
-        if (stadiumRepository.existsById(id)) {
+        if (!stadiumRepository.existsById(id)) {
             throw new RuntimeException("Stadium not found");
         }
         stadiumRepository.deleteById(id);
+    }
+
+
+    public StadiumDTO updateStadiumById(Long id, StadiumDTO stadiumDTO){
+
     }
 }
