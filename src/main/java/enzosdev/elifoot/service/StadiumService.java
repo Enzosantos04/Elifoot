@@ -57,5 +57,19 @@ public class StadiumService {
 
     public StadiumDTO updateStadiumById(Long id, StadiumDTO stadiumDTO){
 
+        Stadium stadium = stadiumRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Stadium not found"));
+
+        if(stadiumDTO.getName() == null || stadiumDTO.getName().isEmpty() || stadiumDTO.getCity() == null || stadiumDTO.getCity().isEmpty()){
+            throw new RuntimeException("Stadium's Name and City can not be empty");
+        }
+
+        stadium.setName(stadiumDTO.getName());
+        stadium.setCity(stadiumDTO.getCity());
+        stadium.setCapacity(stadiumDTO.getCapacity());
+        stadium.setUrlImg(stadiumDTO.getUrlImg());
+
+        Stadium updatedStadium = stadiumRepository.save(stadium);
+        return stadiumMapper.map(updatedStadium);
     }
 }
