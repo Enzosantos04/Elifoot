@@ -1,5 +1,6 @@
 package enzosdev.elifoot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Club {
     private Stadium stadium;
 
     @OneToMany
+    @JsonIgnore
     private List<Player> players;
 
 
