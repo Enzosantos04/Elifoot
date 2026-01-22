@@ -4,10 +4,7 @@ import enzosdev.elifoot.dto.ClubDTO;
 import enzosdev.elifoot.service.ClubService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/clubs")
@@ -28,5 +25,11 @@ public class ClubController {
     @GetMapping("/{id}")
     public ClubDTO findClubById(@PathVariable Long id){
         return clubService.findClubById(id);
+    }
+
+
+    @PostMapping
+    public ClubDTO createClub(@RequestBody ClubDTO clubDTO){
+        return clubService.createClub(clubDTO);
     }
 }
