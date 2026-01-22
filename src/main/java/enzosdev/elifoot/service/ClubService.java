@@ -3,6 +3,7 @@ package enzosdev.elifoot.service;
 
 import enzosdev.elifoot.dto.ClubDTO;
 import enzosdev.elifoot.entity.Club;
+import enzosdev.elifoot.entity.Stadium;
 import enzosdev.elifoot.mapper.ClubMapper;
 import enzosdev.elifoot.repository.ClubRepository;
 import org.springframework.data.domain.Page;
@@ -34,5 +35,12 @@ public class ClubService {
         Optional<Club> club = clubRepository.findById(id);
               return club.map(clubMapper::map)
                       .orElseThrow(() -> new RuntimeException("Club Not found."));
+    }
+
+    public ClubDTO createClub(ClubDTO clubDTO){
+        Club club = clubMapper.map(clubDTO);
+        club = clubRepository.save(club);
+        return clubMapper.map(club);
+
     }
 }
