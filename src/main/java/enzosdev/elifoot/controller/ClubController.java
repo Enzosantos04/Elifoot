@@ -4,6 +4,7 @@ import enzosdev.elifoot.dto.ClubDTO;
 import enzosdev.elifoot.service.ClubService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -32,4 +33,15 @@ public class ClubController {
     public ClubDTO createClub(@RequestBody ClubDTO clubDTO){
         return clubService.createClub(clubDTO);
     }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteClubById(@PathVariable Long id){
+        clubService.deleteClubById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
+
 }
