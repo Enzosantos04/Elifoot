@@ -22,9 +22,9 @@ public class ClubMapper {
 
     public Club map(ClubDTO clubDTO){
         Club club = new Club();
-        club.setId(club.getId());
-        club.setName(club.getName());
-        club.setFounded(club.getFounded());
+        club.setId(clubDTO.getId());
+        club.setName(clubDTO.getName());
+        club.setFounded(clubDTO.getFounded());
         club.setUrlImg(clubDTO.getUrlImg());
         club.setStadium(clubDTO.getStadium());
 
