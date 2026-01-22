@@ -36,11 +36,17 @@ public class ClubController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteClubById(@PathVariable Long id){
+    public ResponseEntity<?> deleteClubById(@PathVariable Long id) {
         clubService.deleteClubById(id);
         return ResponseEntity.noContent().build();
     }
 
+
+    @PatchMapping("/{id}")
+    public ClubDTO updateClubById(@PathVariable Long id, @RequestBody ClubDTO clubDTO) {
+        return clubService.updateClubById(id, clubDTO);
+
+    }
 
 
 
