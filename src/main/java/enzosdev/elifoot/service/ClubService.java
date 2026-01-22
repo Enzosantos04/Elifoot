@@ -2,6 +2,7 @@ package enzosdev.elifoot.service;
 
 
 import enzosdev.elifoot.dto.ClubDTO;
+import enzosdev.elifoot.dto.StadiumDTO;
 import enzosdev.elifoot.entity.Club;
 import enzosdev.elifoot.entity.Stadium;
 import enzosdev.elifoot.mapper.ClubMapper;
@@ -42,5 +43,28 @@ public class ClubService {
         club = clubRepository.save(club);
         return clubMapper.map(club);
 
+    }
+    public void deleteClubById(Long id){
+        if(!clubRepository.existsById(id)){
+            throw new RuntimeException("Club Not Found");
+        }
+        clubRepository.deleteById(id);
+    }
+
+    public ClubDTO updateClubById(Long id, ClubDTO clubDTO){
+
+        Club club = clubRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Club not found"));
+
+        if(clubDTO.getName() == null || clubDTO.getName().isEmpty() || clubDTO.getFounded() == null){
+            throw new RuntimeException("Club's Name and foundation can not be empty");
+        }
+
+        club.setName(clubDTO.getName());
+        club.setFounded(clubDTO.getFounded());
+        club.setUrlImg(clubDTO.getUrlImg());
+
+        Club updatedClub = clubRepository.save(club);
+        return clubMapper.map(updatedClub);
     }
 }
