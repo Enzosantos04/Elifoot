@@ -3,6 +3,7 @@ package enzosdev.elifoot.mapper;
 
 import enzosdev.elifoot.dto.ClubDTO;
 import enzosdev.elifoot.entity.Club;
+import enzosdev.elifoot.entity.Stadium;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,8 +15,10 @@ public class ClubMapper {
         dto.setName(club.getName());
         dto.setFounded(club.getFounded());
         dto.setUrlImg(club.getUrlImg());
+        if(club.getStadium() != null){
+            dto.setStadiumId(club.getStadium().getId());
+        }
         dto.setStadium(club.getStadium());
-
         return dto;
     }
 
@@ -26,7 +29,11 @@ public class ClubMapper {
         club.setName(clubDTO.getName());
         club.setFounded(clubDTO.getFounded());
         club.setUrlImg(clubDTO.getUrlImg());
-        club.setStadium(clubDTO.getStadium());
+        if(clubDTO.getStadiumId() != null){
+            Stadium stadium = new Stadium();
+            stadium.setId(clubDTO.getStadiumId());
+            club.setStadium(stadium);
+        }
 
         return club;
     }
