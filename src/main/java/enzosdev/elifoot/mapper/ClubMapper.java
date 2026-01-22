@@ -14,6 +14,7 @@ public class ClubMapper {
         dto.setName(club.getName());
         dto.setFounded(club.getFounded());
         dto.setUrlImg(club.getUrlImg());
+        dto.setStadium(club.getStadium());
 
         return dto;
     }
@@ -25,6 +26,7 @@ public class ClubMapper {
         club.setName(club.getName());
         club.setFounded(club.getFounded());
         club.setUrlImg(clubDTO.getUrlImg());
+        club.setStadium(clubDTO.getStadium());
 
         return club;
     }
