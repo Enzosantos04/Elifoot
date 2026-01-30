@@ -9,7 +9,6 @@ public class PlayerMapper {
 
     public PlayerDTO map(Player player){
         PlayerDTO dto = new PlayerDTO();
-        dto.setId(player.getId());
         dto.setName(player.getName());
         dto.setPosition(player.getPosition());
         dto.setShirtNumber(player.getShirtNumber());
@@ -23,7 +22,6 @@ public class PlayerMapper {
 
     public Player map(PlayerDTO playerDTO){
         Player player = new Player();
-        player.setId(playerDTO.getId());
         player.setName(playerDTO.getName());
         player.setPosition(playerDTO.getPosition());
         player.setShirtNumber(playerDTO.getShirtNumber());
