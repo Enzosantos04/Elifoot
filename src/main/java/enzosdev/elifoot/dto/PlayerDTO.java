@@ -23,6 +23,8 @@ public class PlayerDTO {
     private Integer shirtNumber;
     private String urlImg;
 
+    private Long clubId;
+
     private Club club;
 
 
