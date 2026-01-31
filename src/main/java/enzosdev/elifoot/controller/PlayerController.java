@@ -4,6 +4,7 @@ import enzosdev.elifoot.dto.PlayerDTO;
 import enzosdev.elifoot.service.PlayerService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,6 +28,14 @@ public class PlayerController {
     public Page<PlayerDTO> findAllPlayer(Pageable pageable){
         return playerService.findAllPlayer(pageable);
     }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletePlayerById(@PathVariable Long id){
+        playerService.deletePlayerById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 
