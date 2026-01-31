@@ -1,20 +1,26 @@
 package enzosdev.elifoot.controller;
 
 import enzosdev.elifoot.dto.ClubDTO;
+import enzosdev.elifoot.dto.PlayerDTO;
 import enzosdev.elifoot.service.ClubService;
+import enzosdev.elifoot.service.PlayerService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/clubs")
 public class ClubController {
 
     private final ClubService clubService;
+    private final PlayerService playerService;
 
-    public ClubController(ClubService clubService) {
+    public ClubController(ClubService clubService, PlayerService playerService) {
         this.clubService = clubService;
+        this.playerService = playerService;
     }
 
     @GetMapping
@@ -46,6 +52,12 @@ public class ClubController {
     public ClubDTO updateClubById(@PathVariable Long id, @RequestBody ClubDTO clubDTO) {
         return clubService.updateClubById(id, clubDTO);
 
+    }
+
+    @GetMapping("/{id}/players")
+    public List<PlayerDTO> getPlayersByClub(@PathVariable long id){
+        List<PlayerDTO> players = playerService.findPlayersByClubId(id);
+        return players;
     }
 
 
