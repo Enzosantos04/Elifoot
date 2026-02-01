@@ -1,4 +1,4 @@
 package enzosdev.elifoot.dto;
 
-public record PositionDTO() {
+public record PositionDTO(String position, String label) {
 }
