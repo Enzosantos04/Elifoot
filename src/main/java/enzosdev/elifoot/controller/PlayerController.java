@@ -36,6 +36,11 @@ public class PlayerController {
         return ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/{id}")
+    public PlayerDTO updatePlayerById(@PathVariable Long id, @RequestBody PlayerDTO playerDTO){
+        return playerService.updatePlayerById(id, playerDTO);
+    }
+
 
 
 
