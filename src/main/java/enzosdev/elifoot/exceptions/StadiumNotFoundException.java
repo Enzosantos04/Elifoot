@@ -1,7 +1,7 @@
 package enzosdev.elifoot.exceptions;
 
-public class StadiuNotFoundException extends RuntimeException {
-  public StadiuNotFoundException(String message) {
-    super(message);
-  }
+public class StadiumNotFoundException extends RuntimeException {
+    public StadiumNotFoundException(String message) {
+        super(message);
+    }
 }
