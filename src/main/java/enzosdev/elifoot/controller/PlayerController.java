@@ -41,7 +41,7 @@ public class PlayerController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<PlayerDTO> updatePlayerById(@PathVariable Long id, @RequestBody PlayerDTO playerDTO){
-        PlayerDTO player = playerService.updatePlayerById(id, playerDTO)
+        PlayerDTO player = playerService.updatePlayerById(id, playerDTO);
         return ResponseEntity.status(HttpStatus.OK).body(player);
     }
 
