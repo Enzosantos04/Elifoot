@@ -4,6 +4,7 @@ import enzosdev.elifoot.dto.PlayerDTO;
 import enzosdev.elifoot.service.PlayerService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,14 +20,16 @@ public class PlayerController {
 
 
     @PostMapping
-    public PlayerDTO createPlayer(@RequestBody PlayerDTO playerDTO){
-        return playerService.createPlayer(playerDTO);
+    public ResponseEntity<PlayerDTO> createPlayer(@RequestBody PlayerDTO playerDTO){
+        PlayerDTO player = playerService.createPlayer(playerDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(player);
 
     }
 
     @GetMapping
-    public Page<PlayerDTO> findAllPlayer(Pageable pageable){
-        return playerService.findAllPlayer(pageable);
+    public ResponseEntity<Page<PlayerDTO>> findAllPlayer(Pageable pageable){
+        Page<PlayerDTO> players = playerService.findAllPlayer(pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(players);
     }
 
 
@@ -37,8 +40,9 @@ public class PlayerController {
     }
 
     @PatchMapping("/{id}")
-    public PlayerDTO updatePlayerById(@PathVariable Long id, @RequestBody PlayerDTO playerDTO){
-        return playerService.updatePlayerById(id, playerDTO);
+    public ResponseEntity<PlayerDTO> updatePlayerById(@PathVariable Long id, @RequestBody PlayerDTO playerDTO){
+        PlayerDTO player = playerService.updatePlayerById(id, playerDTO)
+        return ResponseEntity.status(HttpStatus.OK).body(player);
     }
 
 
