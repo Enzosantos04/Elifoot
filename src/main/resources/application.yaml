@@ -22,8 +22,8 @@ spring:
     locations: classpath:db/migration
     baseline-on-migrate: true
 
-  jwt:
-    public:
-      key: classpath:authz.pub
-    private:
-      key: classpath:authz.pem
+jwt:
+  public:
+    key: classpath:authz.pub
+  private:
+    key: classpath:authz.pem
