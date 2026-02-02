@@ -6,6 +6,7 @@ import enzosdev.elifoot.service.ClubService;
 import enzosdev.elifoot.service.PlayerService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,20 +25,23 @@ public class ClubController {
     }
 
     @GetMapping
-    public Page<ClubDTO> findAll(Pageable pageable){
-        return clubService.findAll(pageable);
+    public ResponseEntity<Page<ClubDTO>> findAll(Pageable pageable){
+        Page<ClubDTO> clubs = clubService.findAll(pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(clubs);
     }
 
 
     @GetMapping("/{id}")
-    public ClubDTO findClubById(@PathVariable Long id){
-        return clubService.findClubById(id);
+    public ResponseEntity<ClubDTO> findClubById(@PathVariable Long id){
+        ClubDTO club = clubService.findClubById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(club);
     }
 
 
     @PostMapping
-    public ClubDTO createClub(@RequestBody ClubDTO clubDTO){
-        return clubService.createClub(clubDTO);
+    public ResponseEntity<ClubDTO> createClub(@RequestBody ClubDTO clubDTO){
+        ClubDTO club = clubService.createClub(clubDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(club);
     }
 
 
@@ -49,15 +53,16 @@ public class ClubController {
 
 
     @PatchMapping("/{id}")
-    public ClubDTO updateClubById(@PathVariable Long id, @RequestBody ClubDTO clubDTO) {
-        return clubService.updateClubById(id, clubDTO);
+    public ResponseEntity<ClubDTO> updateClubById(@PathVariable Long id, @RequestBody ClubDTO clubDTO) {
+        ClubDTO club = clubService.updateClubById(id, clubDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(club);
 
     }
 
     @GetMapping("/{id}/players")
-    public List<PlayerDTO> getPlayersByClub(@PathVariable long id){
+    public ResponseEntity<List<PlayerDTO>> getPlayersByClub(@PathVariable long id){
         List<PlayerDTO> players = playerService.findPlayersByClubId(id);
-        return players;
+        return ResponseEntity.status(HttpStatus.OK).body(players);
     }
 
 
