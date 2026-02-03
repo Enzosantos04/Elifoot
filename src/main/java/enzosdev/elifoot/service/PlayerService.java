@@ -62,6 +62,9 @@ public class PlayerService {
     }
 
     public void deletePlayerById(Long id){
+        if(!playerRepository.existsById(id)){
+            throw new PlayerNotFoundException("Player Not Found");
+        }
         playerRepository.deleteById(id);
     }
 
