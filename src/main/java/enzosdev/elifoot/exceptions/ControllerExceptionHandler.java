@@ -30,4 +30,12 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(StadiumNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleStadiumNotFoundException(StadiumNotFoundException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", ex.getMessage());
+        response.put("message", "Stadium not found");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
 }
