@@ -3,6 +3,7 @@ package enzosdev.elifoot.service;
 
 import enzosdev.elifoot.dto.StadiumDTO;
 import enzosdev.elifoot.entity.Stadium;
+import enzosdev.elifoot.exceptions.StadiumNotFoundException;
 import enzosdev.elifoot.mapper.StadiumMapper;
 import enzosdev.elifoot.repository.StadiumRepository;
 import org.springframework.data.domain.Page;
@@ -43,13 +44,13 @@ public class StadiumService {
 
     public StadiumDTO findStadiumById(Long id){
         Optional<Stadium> stadium = stadiumRepository.findById(id);
-        return stadium.map(stadiumMapper::map).orElseThrow(()-> new RuntimeException("Stadium not found"));
+        return stadium.map(stadiumMapper::map).orElseThrow(()-> new StadiumNotFoundException("Stadium not found"));
     }
 
 
     public void deleteStadiumById(Long id) {
         if (!stadiumRepository.existsById(id)) {
-            throw new RuntimeException("Stadium not found");
+            throw new StadiumNotFoundException("Stadium not found");
         }
         stadiumRepository.deleteById(id);
     }
@@ -58,7 +59,7 @@ public class StadiumService {
     public StadiumDTO updateStadiumById(Long id, StadiumDTO stadiumDTO){
 
         Stadium stadium = stadiumRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Stadium not found"));
+                .orElseThrow(()-> new StadiumNotFoundException("Stadium not found"));
 
         if(stadiumDTO.getName() == null || stadiumDTO.getName().isEmpty() || stadiumDTO.getCity() == null || stadiumDTO.getCity().isEmpty()){
             throw new RuntimeException("Stadium's Name and City can not be empty");
