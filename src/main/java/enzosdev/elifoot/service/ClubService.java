@@ -40,6 +40,9 @@ public class ClubService {
     }
 
     public ClubDTO createClub(ClubDTO clubDTO){
+        if(clubDTO.getName() == null || clubDTO.getName().isEmpty() || clubDTO.getFounded() == null){
+            throw new RuntimeException("Club's Name and foundation can not be empty");
+        }
         Club club = clubMapper.map(clubDTO);
         club = clubRepository.save(club);
         return clubMapper.map(club);
