@@ -5,6 +5,7 @@ import enzosdev.elifoot.dto.ClubDTO;
 import enzosdev.elifoot.dto.StadiumDTO;
 import enzosdev.elifoot.entity.Club;
 import enzosdev.elifoot.entity.Stadium;
+import enzosdev.elifoot.exceptions.ClubNotFoundException;
 import enzosdev.elifoot.mapper.ClubMapper;
 import enzosdev.elifoot.repository.ClubRepository;
 import org.springframework.data.domain.Page;
@@ -35,7 +36,7 @@ public class ClubService {
     public ClubDTO findClubById(Long id){
         Optional<Club> club = clubRepository.findById(id);
               return club.map(clubMapper::map)
-                      .orElseThrow(() -> new RuntimeException("Club Not found."));
+                      .orElseThrow(() -> new ClubNotFoundException("Club Not found."));
     }
 
     public ClubDTO createClub(ClubDTO clubDTO){
@@ -46,7 +47,7 @@ public class ClubService {
     }
     public void deleteClubById(Long id){
         if(!clubRepository.existsById(id)){
-            throw new RuntimeException("Club Not Found");
+            throw new ClubNotFoundException("Club Not Found");
         }
         clubRepository.deleteById(id);
     }
@@ -54,7 +55,7 @@ public class ClubService {
     public ClubDTO updateClubById(Long id, ClubDTO clubDTO){
 
         Club club = clubRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Club not found"));
+                .orElseThrow(()-> new ClubNotFoundException("Club not found"));
 
         if(clubDTO.getName() == null || clubDTO.getName().isEmpty() || clubDTO.getFounded() == null){
             throw new RuntimeException("Club's Name and foundation can not be empty");
