@@ -50,6 +50,9 @@ public class PlayerService {
     }
 
     public List<PlayerDTO> findPlayersByClubId(Long id){
+        if (playerRepository.findPlayersByClubId(id).isEmpty()){
+            throw new PlayerNotFoundException("No players found for the given club ID.");
+        }
         List<Player> players = playerRepository.findPlayersByClubId(id);
         return players.stream()
                 .map(playerMapper::map)
