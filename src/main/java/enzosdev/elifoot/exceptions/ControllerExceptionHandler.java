@@ -21,4 +21,13 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 
     }
+
+    @ExceptionHandler(ClubNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleClubNotFoundException(ClubNotFoundException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", ex.getMessage());
+        response.put("message", "Club not found");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
 }
