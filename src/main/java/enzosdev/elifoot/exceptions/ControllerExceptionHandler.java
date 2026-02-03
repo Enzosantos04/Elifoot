@@ -38,4 +38,12 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(FieldsEmptyException.class)
+    public ResponseEntity<Map<String, String>> handleFieldsEmptyException(FieldsEmptyException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", ex.getMessage());
+        response.put("message", "Required fields are empty");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
 }
