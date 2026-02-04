@@ -5,6 +5,7 @@ import enzosdev.elifoot.dto.PlayerDTO;
 import enzosdev.elifoot.entity.Club;
 import enzosdev.elifoot.entity.Player;
 import enzosdev.elifoot.entity.Stadium;
+import enzosdev.elifoot.exceptions.FieldsEmptyException;
 import enzosdev.elifoot.exceptions.PlayerNotFoundException;
 import enzosdev.elifoot.mapper.PlayerMapper;
 import enzosdev.elifoot.mapper.StadiumMapper;
@@ -35,7 +36,7 @@ public class PlayerService {
 
     public PlayerDTO createPlayer(PlayerDTO playerDTO){
         if(playerDTO.getName() == null || playerDTO.getName().isEmpty() || playerDTO.getShirtNumber() == null || playerDTO.getPosition() == null){
-            throw new RuntimeException("The fields name, shirt number and position can not be empty, try again!");
+            throw new FieldsEmptyException("The fields name, shirt number and position can not be empty, try again!");
 
         }
         Player player = playerMapper.map(playerDTO);
@@ -74,7 +75,7 @@ public class PlayerService {
                 .orElseThrow(()-> new PlayerNotFoundException("player not found"));
 
         if(playerDTO.getName() == null || playerDTO.getName().isEmpty() || playerDTO.getShirtNumber() == null || playerDTO.getPosition() == null){
-            throw new RuntimeException("The fields name, shirt number and position can not be empty, try again!");
+            throw new FieldsEmptyException("The fields name, shirt number and position can not be empty, try again!");
 
         }
 

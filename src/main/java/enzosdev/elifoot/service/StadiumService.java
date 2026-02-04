@@ -3,6 +3,7 @@ package enzosdev.elifoot.service;
 
 import enzosdev.elifoot.dto.StadiumDTO;
 import enzosdev.elifoot.entity.Stadium;
+import enzosdev.elifoot.exceptions.FieldsEmptyException;
 import enzosdev.elifoot.exceptions.StadiumNotFoundException;
 import enzosdev.elifoot.mapper.StadiumMapper;
 import enzosdev.elifoot.repository.StadiumRepository;
@@ -33,7 +34,7 @@ public class StadiumService {
     public StadiumDTO createStadium(StadiumDTO stadiumDTO){
 
         if (stadiumDTO.getName().isEmpty() || stadiumDTO.getCity().isEmpty() || stadiumDTO.getCity().isBlank()){
-            throw new RuntimeException("Stadium can not be empty, try again");
+            throw new FieldsEmptyException("Stadium can not be empty, try again");
         } else {
             Stadium stadium = stadiumMapper.map(stadiumDTO);
             stadium = stadiumRepository.save(stadium);
@@ -62,7 +63,7 @@ public class StadiumService {
                 .orElseThrow(()-> new StadiumNotFoundException("Stadium not found"));
 
         if(stadiumDTO.getName() == null || stadiumDTO.getName().isEmpty() || stadiumDTO.getCity() == null || stadiumDTO.getCity().isEmpty()){
-            throw new RuntimeException("Stadium's Name and City can not be empty");
+            throw new FieldsEmptyException("Stadium's Name and City can not be empty");
         }
 
         stadium.setName(stadiumDTO.getName());
