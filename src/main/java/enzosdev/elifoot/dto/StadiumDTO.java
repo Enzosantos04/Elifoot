@@ -14,9 +14,9 @@ public class StadiumDTO {
 
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Stadium name cannot be blank")
     private String name;
-    @NotBlank
+    @NotBlank(message = "City cannot be blank")
     private String city;
 
     private Integer capacity;
