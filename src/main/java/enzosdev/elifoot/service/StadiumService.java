@@ -31,16 +31,18 @@ public class StadiumService {
     }
 
 
-    public StadiumDTO createStadium(StadiumDTO stadiumDTO){
+    public StadiumDTO createStadium(StadiumDTO stadiumDTO) {
 
-        if (stadiumDTO.getName().isEmpty() || stadiumDTO.getCity().isEmpty() || stadiumDTO.getCity().isBlank()){
-            throw new FieldsEmptyException("Stadium can not be empty, try again");
-        } else {
-            Stadium stadium = stadiumMapper.map(stadiumDTO);
-            stadium = stadiumRepository.save(stadium);
-            return stadiumMapper.map(stadium);
+        if (stadiumDTO.getName() == null || stadiumDTO.getName().isBlank()
+                || stadiumDTO.getCity() == null || stadiumDTO.getCity().isBlank()) {
+
+            throw new FieldsEmptyException("Name and city must not be empty");
         }
 
+        Stadium stadium = stadiumMapper.map(stadiumDTO);
+        stadium = stadiumRepository.save(stadium);
+
+        return stadiumMapper.map(stadium);
     }
 
     public StadiumDTO findStadiumById(Long id){
