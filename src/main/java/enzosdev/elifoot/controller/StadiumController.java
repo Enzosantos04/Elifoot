@@ -29,7 +29,7 @@ public class StadiumController {
 
 
     @PostMapping
-    public ResponseEntity<StadiumDTO> createStadium(@RequestBody StadiumDTO stadiumDTO){
+    public ResponseEntity<StadiumDTO> createStadium(@Valid @RequestBody StadiumDTO stadiumDTO){
         StadiumDTO newStadium = stadiumService.createStadium(stadiumDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newStadium);
     }
