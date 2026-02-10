@@ -13,12 +13,4 @@ public class LoginMapper {
         loginDTO.setEmail(user.getEmail());
         return loginDTO;
     }
-
-
-    public User map(LoginDTO loginDTO){
-        User user = new User();
-        user.setId(loginDTO.getId());
-        user.setEmail(loginDTO.getEmail());
-        return user;
-    }
 }
