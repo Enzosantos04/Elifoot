@@ -24,7 +24,7 @@ public class User {
     private boolean active;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_scopes",
             joinColumns = @JoinColumn(name = "user_id"),
