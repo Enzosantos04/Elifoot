@@ -1,16 +1,14 @@
 package enzosdev.elifoot.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
-public class LoginRequestDTO {
+public class LoginResponseDTO {
 
     private String token;
     private Long expiresIn;
