@@ -2,6 +2,7 @@ package enzosdev.elifoot.controller;
 
 
 import enzosdev.elifoot.dto.LoginDTO;
+import enzosdev.elifoot.dto.LoginResponseDTO;
 import enzosdev.elifoot.service.LoginService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ public class LoginController {
 
 
     @PostMapping
-    public LoginDTO login(@RequestBody LoginDTO loginDTO){
+    public LoginResponseDTO login(@RequestBody LoginDTO loginDTO){
         return loginService.login(loginDTO);
     }
 }
