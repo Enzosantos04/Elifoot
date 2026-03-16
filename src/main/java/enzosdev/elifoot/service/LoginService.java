@@ -1,6 +1,7 @@
 package enzosdev.elifoot.service;
 
 import enzosdev.elifoot.dto.LoginDTO;
+import enzosdev.elifoot.dto.LoginResponseDTO;
 import enzosdev.elifoot.entity.Scope;
 import enzosdev.elifoot.entity.User;
 import enzosdev.elifoot.repository.UserRepository;
@@ -30,16 +31,18 @@ public class LoginService {
     }
 
 
-    public LoginDTO login(LoginDTO loginDTO) {
-        Optional<User> optionalUser = userRepository.findByEmail(loginDTO.getEmail());
-        if (optionalUser.isEmpty() || !isPasswordValid(loginDTO.getPassword(), optionalUser.get().getPassword())) {
-            throw new BadCredentialsException("Invalid email or password");
+    public LoginResponseDTO login(LoginDTO request) {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new BadCredentialsException("Invalid email or password"));
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid email or password");
         }
 
 
 
-        User savedUser = optionalUser.get();
-        List<String> scopes = savedUser.getScopes().stream()
+
+        List<String> scopes = user.getScopes().stream()
                 .map(Scope::getName)
                 .toList();
 
@@ -47,20 +50,23 @@ public class LoginService {
         JwtClaimsSet jwtClaims = JwtClaimsSet.builder()
                 .issuer("elifoot")
                 .expiresAt(Instant.now().plusSeconds(expiresIn))
-                .subject( savedUser.getEmail())
-                .claim("scopes", scopes)
-                .claim("email", savedUser.getEmail())
+                .subject( user.getEmail())
+                .claim("scope", scopes)
+                .claim("email", user.getEmail())
                 .build();
         String token = jwtEncoder.encode(JwtEncoderParameters.from(jwtClaims)).getTokenValue();
 
-        return LoginDTO.builder()
-                .email(savedUser.getEmail())
+        return LoginResponseDTO.builder()
                 .token(token)
+                .expiresIn(expiresIn)
                 .build();
+
     }
 
     private boolean isPasswordValid(String password, String savedPassword){
         return passwordEncoder.matches(password, savedPassword);
     }
+
+
 
 }
