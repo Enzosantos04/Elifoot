@@ -1,16 +1,14 @@
 package enzosdev.elifoot.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@Builder
 public class LoginDTO {
-
-    private Long id;
     @NotBlank
     private String email;
     @NotBlank
