@@ -39,9 +39,6 @@ public class LoginService {
             throw new BadCredentialsException("Invalid email or password");
         }
 
-
-
-
         List<String> scopes = user.getScopes().stream()
                 .map(Scope::getName)
                 .toList();
