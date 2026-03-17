@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,20 +22,21 @@ public class StadiumController {
         this.stadiumService = stadiumService;
     }
 
+    @PreAuthorize("hasAnyAuthority('SCOPE_stadium:read', 'SCOPE_admin:all')")
     @GetMapping
     public ResponseEntity<Page<StadiumDTO>> findAll(Pageable pageable){
         Page<StadiumDTO> stadiumDTO = stadiumService.findAll(pageable);
         return ResponseEntity.status(HttpStatus.OK).body(stadiumDTO);
     }
 
-
+    @PreAuthorize("hasAnyAuthority('SCOPE_stadium:write', 'SCOPE_admin:all')")
     @PostMapping
     public ResponseEntity<StadiumDTO> createStadium(@Valid @RequestBody StadiumDTO stadiumDTO){
         StadiumDTO newStadium = stadiumService.createStadium(stadiumDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newStadium);
     }
 
-
+    @PreAuthorize("hasAnyAuthority('SCOPE_stadium:read', 'SCOPE_admin:all')")
     @GetMapping("/{id}")
     public ResponseEntity<StadiumDTO> findStadiumById(@PathVariable Long id){
         StadiumDTO stadiumDTO = stadiumService.findStadiumById(id);
