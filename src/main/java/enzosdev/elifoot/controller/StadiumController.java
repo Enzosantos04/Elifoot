@@ -1,6 +1,8 @@
 package enzosdev.elifoot.controller;
 
 
+import enzosdev.elifoot.config.annotations.CanReadPlayer;
+import enzosdev.elifoot.config.annotations.CanWriteStadium;
 import enzosdev.elifoot.dto.StadiumDTO;
 import enzosdev.elifoot.service.StadiumService;
 import jakarta.validation.Valid;
@@ -29,14 +31,14 @@ public class StadiumController {
         return ResponseEntity.status(HttpStatus.OK).body(stadiumDTO);
     }
 
-    @PreAuthorize("hasAnyAuthority('SCOPE_stadium:write', 'SCOPE_admin:all')")
+    @CanWriteStadium
     @PostMapping
     public ResponseEntity<StadiumDTO> createStadium(@Valid @RequestBody StadiumDTO stadiumDTO){
         StadiumDTO newStadium = stadiumService.createStadium(stadiumDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newStadium);
     }
 
-    @PreAuthorize("hasAnyAuthority('SCOPE_stadium:read', 'SCOPE_admin:all')")
+    @CanReadPlayer
     @GetMapping("/{id}")
     public ResponseEntity<StadiumDTO> findStadiumById(@PathVariable Long id){
         StadiumDTO stadiumDTO = stadiumService.findStadiumById(id);
