@@ -1,4 +1,4 @@
-package enzosdev.elifoot.config;
+package enzosdev.elifoot.config.security;
 
 
 import com.nimbusds.jose.jwk.JWK;
