@@ -1,11 +1,14 @@
 package enzosdev.elifoot.controller;
 
+import enzosdev.elifoot.config.annotations.CanReadPlayer;
+import enzosdev.elifoot.config.annotations.CanWritePlayer;
 import enzosdev.elifoot.dto.PlayerDTO;
 import enzosdev.elifoot.service.PlayerService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,7 +21,7 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-
+    @CanWritePlayer
     @PostMapping
     public ResponseEntity<PlayerDTO> createPlayer(@RequestBody PlayerDTO playerDTO){
         PlayerDTO player = playerService.createPlayer(playerDTO);
@@ -26,6 +29,7 @@ public class PlayerController {
 
     }
 
+    @CanReadPlayer
     @GetMapping
     public ResponseEntity<Page<PlayerDTO>> findAllPlayer(Pageable pageable){
         Page<PlayerDTO> players = playerService.findAllPlayer(pageable);
